@@ -244,3 +244,6 @@ reply__column의 첫번째 자식을 안보이게 해주세요.*/
 .reply:focus-within {
   transform: translateY(80px);
 }
+
+/* 즉, 눌렀을때 reply(전체 form)은 내려가는데 
+input만 올라와서 남는다 */
