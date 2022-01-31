@@ -1,0 +1,246 @@
+#chat-screen {
+  background-color: #abc1d1;
+  height: 500vh;
+}
+
+#chat-screen .alt-header,
+#chat-screen .status-bar {
+  top: 0;
+  position: fixed;
+  width: 100%;
+  /* 여기 width: 100% 주는거 왜주지? */
+  background-color: #abc1d1;
+  box-sizing: border-box;
+}
+
+/* z-index는 레이어의 순서, 값이 더 작으면 큰값에 가려짐*/
+/* absolute position or fixed position에 대해서 설정가능 */
+
+#chat-screen .status-bar {
+  z-index: 2;
+}
+
+#chat-screen .alt-header {
+  top: 10px;
+  z-index: 1;
+}
+
+/* alt-header는 fixed인데 거기다 top10을 줘서 10만큼 내려가네? 신기하다 
+ top bottom같은건 relative랑 absolute에만 쓰는건줄 알았는데 */
+
+@keyframes fadeIn {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.main-chat {
+  margin-top: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 1s linear;
+}
+
+.chat_timestamp {
+  font-size: 20px;
+  color: white;
+  background-color: #92a4b2;
+  padding: 15px;
+  border-radius: 20px;
+  margin-bottom: 25px;
+}
+
+@keyframes messageFromLeft {
+  from {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.message-row {
+  width: 100%;
+  display: flex;
+  margin-bottom: 25px;
+}
+
+.message-row {
+  animation: messageFromLeft 1s linear;
+}
+
+.message-row img {
+  width: 50px;
+  height: 50px;
+  border-radius: 45%;
+  margin-right: 15px;
+}
+
+.message__author {
+  margin-bottom: 8px;
+  display: block;
+}
+
+.message__info {
+  display: Flex;
+  /* Cross axis 땅바닥 꽂기 */
+  align-items: flex-end;
+}
+
+.message__bubble {
+  background-color: white;
+  padding: 13px;
+  border-radius: 15px;
+  /*여기서 처음본 구석 border CSS */
+  border-top-left-radius: 0px;
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.message__time,
+.message__author {
+  opacity: 0.8;
+  font-size: 16px;
+}
+
+@keyframes messageFromRight {
+  from {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.message-row--own {
+  justify-content: flex-end;
+  animation: messageFromRight 1s linear;
+}
+
+.message-row--own .message__bubble {
+  background-color: var(--yellow);
+  border-radius: 15px;
+  border-top-right-radius: 0px;
+  margin-right: 0px;
+  margin-left: 15px;
+}
+
+/** 순서를 바꾸는 방법 1  order , flex children에게만 할 수 있다
+
+.message-row--own .message__bubble {
+  order: 1;
+}
+
+.message-row--own .message__time {
+  order: 0;
+}
+
+**/
+
+/* 순서 바꾸기 2 , flex-direction: row-reverse; */
+
+.message-row--own .message__info {
+  flex-direction: row-reverse;
+}
+
+.reply {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 25px;
+  box-sizing: border-box;
+  align-items: center;
+  transition: all 0.4s ease-in-out;
+}
+
+.reply .reply__column:first-child {
+  width: 10%;
+}
+
+.reply .reply__column:last-child {
+  width: 90%;
+  position: relative;
+}
+
+.reply i {
+  opacity: 0.5;
+}
+
+.reply input {
+  width: 100%;
+  /** input의 부모인 column이 width를 갖고있지않으면 적용되지 않는다. **/
+  border: var(--main-border);
+  border-radius: 25px;
+  padding: 15px;
+  box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
+}
+
+.reply__column:last-child > i,
+.reply__column:last-child button {
+  position: absolute;
+  right: -3px;
+  top: 2px;
+}
+
+.reply__column:last-child > i {
+  right: 50px;
+  top: 15px;
+}
+
+.reply__column button {
+  background-color: var(--yellow);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.reply__column button o {
+  opacity: 1;
+}
+
+.reply__colmun button:foucs,
+.reply__column button:active {
+  outline: none;
+}
+
+.reply .reply__column:first-child,
+.reply .fa-smile-wink,
+.reply button {
+  transition: opacity 0.3s eas-in-out;
+}
+
+.reply:focus-within .reply__column:first-child {
+  opacity: 0;
+}
+
+/* reply 내부에 어떤 element가 focus되어 있다면.. 
+reply__column의 첫번째 자식을 안보이게 해주세요.*/
+
+.reply:focus-within .fa-smile-wink,
+.reply:focus-within button {
+  opacity: 0;
+}
+
+.reply:focus-within input {
+  width: 95vw;
+  transform: translateX(-10%) translateY(-90px);
+}
+
+.reply:focus-within {
+  transform: translateY(80px);
+}
