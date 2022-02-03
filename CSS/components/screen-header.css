@@ -11,22 +11,8 @@
   font-weight: 600;
 }
 
-.screen-header__icons {
-  position: relative;
-}
-
 .screen-header__icons span {
   margin-left: 25px;
-}
-
-.find__dot {
-  background-color: tomato;
-  width: 6px;
-  height: 6px;
-  border-radius: 3px;
-  position: absolute;
-  left: 120px;
-  bottom: 20px;
 }
 
 @keyframes rotateCog {
